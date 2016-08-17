@@ -1,0 +1,97 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Close Convention"
+            description="Allow you to close convention"></page-title>
+
+<form role="form" method ="post" ng-controller="CloseConventionCtrl" class="validate" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basic close convention information</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <autosuggestion
+                                    title="Company"
+                                    description="Type to select Company"
+                                    name="companyName" ng-model="closeConvention.companyId"
+                                    url="mpost/services/company/suggest">
+                            </autosuggestion>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="shopId">Shop<required/></label>
+                                <select class="form-control" ng-model="closeConvention.shopId" name="shopId" id="shopId"
+                                        data-validate="required" data-message-required="This field is required">
+                                    <option ng-repeat="shop in shops" value="{{shop.id}}">{{shop.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="terminalId">Terminal<required/></label>
+                                <select class="form-control" ng-model="closeConvention.terminalId" name="terminalId" id="terminalId"
+                                        data-validate="required" data-message-required="This field is required">
+                                    <option ng-repeat="terminal in terminals" value="{{terminal.id}}">{{terminal.id}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="number">Convention Number<required/></label>
+                                <input type="text" class="form-control" ng-model="closeConvention.number" name="number" id="number" placeholder="Ex. 1"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="guaranty">Guaranty <required/></label>
+                                <input type="text" class="form-control" ng-model="closeConvention.guaranty" name="guaranty" id="guaranty" placeholder="Ex. 1"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="guaranteeLoss">Guarantee Loss<required/></label>
+                                <input type="text" class="form-control" ng-model="closeConvention.guaranteeLoss" name="guaranteeLoss" id="guaranteeLoss" placeholder="Ex. Cartomat SA"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="comment">Comment<required/></label>
+                                <input type="text" class="form-control" ng-model="closeConvention.comment" name="comment" id="comment" placeholder="Ex. Cartomat SA"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="close()">Close</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

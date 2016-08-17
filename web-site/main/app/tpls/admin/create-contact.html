@@ -1,0 +1,78 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create Contact"
+            description="Allow you to create new contact"></page-title>
+
+<form role="form" ng-controller="ContactCtrl" class="validate" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h3 class="panel-title">Basic contact information</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <autosuggestion
+                                    title="Company"
+                                    description="Type to select Company"
+                                    name="companyName" ng-model="contact.companyId"
+                                    url="mpost/services/company/suggest">
+                            </autosuggestion>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="firstName">First Name<required/></label>
+                                <input type="text" class="form-control" ng-model="contact.firstName" name = "firstName" id="firstName"
+                                       data-validate="required" placeholder="Ex. Adil" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="lastName">Last Name<required/></label>
+                                <input type="text"  class="form-control" ng-model="contact.lastName" name = "lastName" id="lastName"
+                                       data-validate="required" placeholder="Ex. Chraoudou" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="mail">Mail<required/></label>
+                                <input type="text" class="form-control" ng-model="mail" name="mail" id="mail"
+                                       data-validate="required,email" data-message-required="This field is required"
+                                       data-message-email="Email is invalid"
+                                       placeholder="Ex. mail@mail.com"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="gsm">GSM Number<required/></label>
+                                <input type="text" class="form-control" ng-model="gsm" name = "contact.gsm" id="gsm"
+                                       data-validate="required" data-message-required="This field is required" placeholder="Ex. 093 215 22 30"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create()">Create Contact</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

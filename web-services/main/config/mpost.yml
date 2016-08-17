@@ -1,0 +1,26 @@
+configLocationsType: classpath
+
+configLocations:
+  - beans.xml
+
+resources:
+  - helloResource
+  - adminResource
+  - comListResource
+  - companyResource
+  - contactResource
+  - deliveryResource
+  - GABResource
+  - postCodeResource
+  - productCategoryResource
+  - productResource
+  - resellerResource
+  - saleChannelResource
+  - shopManagerResource
+  - shopResource
+  - supplierResource
+  - terminalResource
+  - terminalStockResource
+  - terminalTypeResource
+  - telcoSupplierResource
+  - serviceResource

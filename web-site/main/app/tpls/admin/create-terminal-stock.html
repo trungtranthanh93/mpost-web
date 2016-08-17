@@ -1,0 +1,78 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create TerminalStock"
+            description="Allow you to create new terminal stock"></page-title>
+
+<form role="form" ng-controller="TerminalStockCtrl" id="create-terminal-stock" name="terminalStockForm" class="validate" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="serialNumber">Terminal Serial Number <required></required></label>
+                                <input class="form-control" ng-model="terminalStock.serialNumber" id="serialNumber" name="serialNumber"
+                                       data-validate="required" data-message-required="This field is required" placeholder="Ex. 123ABC"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <div class="form-group ">
+                                <label class="control-label" for="macAddress">Terminal Mac Address <required></required></label>
+                                <input class="form-control" ng-model="terminalStock.macAddress" id="macAddress" name="macAddress"
+                                       data-validate="required" data-message-required="This field is required"
+                                       placeholder="Ex. 00:02:77:95:AB:F7" inputmask data-mask="0[9]:[99]:[99]:[99]:[AA]:[A9]" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="telcoSupplier">Telco Supplier <required></required></label>
+                                <select class="form-control" ng-model="terminalStock.telcoSupplierId" id="telcoSupplier" name="telcoSupplier"
+                                        data-validate="require" data-message-required="This field is required">
+                                    <option ng-repeat="telcoSupplier in telcoSuppliers" value="{{telcoSupplier.id}}">{{telcoSupplier.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="simSerialNumber">Sim Serial Number <required></required></label>
+                                <input class="form-control" ng-model="terminalStock.simSerialNum" id="simSerialNumber" name="simSerialNumber"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="simPhoneNumber">Sim Phone Number <required></required></label>
+                                <input class="form-control" ng-model="terminalStock.simPhoneNumber" id="simPhoneNumber" name="simPhoneNumber"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create()">Create Terminal Stock</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

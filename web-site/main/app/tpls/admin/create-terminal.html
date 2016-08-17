@@ -1,0 +1,195 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create Terminal"
+            description="Allow you to create new terminal"></page-title>
+
+<form role="form" ng-controller="TerminalCtrl" id="create-terminal" class="validate" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Terminal</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <autosuggestion
+                                    title="Shop"
+                                    description="Type to select Shop"
+                                    name="shopId" ng-model="shop.shopId"
+                                    url="mpost/services/shop/suggest">
+                            </autosuggestion>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="collectorName">Collector Name
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="terminal.collectorName" id="collectorName"
+                                       name="collectorName"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="collectorCode">Collector Code
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="terminal.collectorCode" id="collectorCode"
+                                       name="collectorCode"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="riskLimited">Is Risk Limited
+                                    <required/>
+                                </label><br/>
+                                <input type="checkbox" id="riskLimited" ng-model="terminal.riskLimited">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3" ng-show="terminal.riskLimited">
+                            <div class="form-group">
+                                <label class="control-label" for="riskLimit">Risk Limitation
+                                    <required/>
+                                </label><br/>
+                                <input class="form-control" ng-model="terminal.riskLimit" name="riskLimit" id="riskLimit"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="terminalType">Terminal Type</label>
+                                <select class="form-control" ng-model="terminal.terminalTypeId" name="terminalType"
+                                        id="terminalType">
+                                    <option ng-repeat="terminalType in terminalTypes" value="terminalType.id">
+                                        {{terminalType.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="serialNumber">Serial Number</label>
+                                <select class="form-control" ng-model="terminal.serialNumber" id="serialNumber"
+                                        name="serialNumber">
+                                    <option ng-repeat="stock in terminalStocks" value="stock.id">
+                                        {{stock.serialNumber}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="conventionNumber">Convention Number
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="terminal.conventionNumber" id="conventionNumber"
+                                       name="conventionNumber" type="text"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="partnerCorrespondence">Partner Correspondence
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="terminal.partnerCorrespondence"
+                                       id="partnerCorrespondence" type="text"
+                                       name="partnerCorrespondence" data-validate="required"
+                                       data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="guarantyAmount">Guaranty Amount
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="terminal.guarantyAmount" id="guarantyAmount"
+                                       data-validate="required" name="guarantyAmount" type="text"
+                                       data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="convention">Convention
+                                    <required/>
+                                </label>
+                                <input ng-model="convention" id="convention" type="file" data-validate="required"
+                                       data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label">Service</label>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-repeat="service in services">
+                        <div class="col-sm-2">
+                            <label>
+                                <input type="checkbox" ng-model="terminal.services" ng-true-value="service.id"
+                                       class="cbr">
+                                {{service.name}}
+                            </label>
+                        </div>
+                        <div ng-show="terminal.services[service.id]" class="col-sm-6">
+                            <table class="table table-bordered  table-striped table-condensed table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Position</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="cbr"></td>
+                                    <td>Arlind</td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="cbr"></td>
+                                    <td>Arlind</td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create()">Create Terminal</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

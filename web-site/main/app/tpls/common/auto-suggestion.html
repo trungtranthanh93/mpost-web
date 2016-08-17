@@ -1,0 +1,30 @@
+<div class="form-group">
+    <label class="control-label" for="{{name}}">{{title}}
+        <required></required>
+    </label>
+
+    <input class="form-control" ng-model="bindModel" id="{{name}}" name="{{name}}"
+           data-validate="required"
+           placeholder="{{description}}"/>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            var name_randomizer = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: '{{url}}'
+            });
+
+            name_randomizer.initialize();
+
+            $('#{{name}}').typeahead({
+                hint: true,
+                highlight: true
+            }, {
+                name: 'string-randomizer',
+                displayKey: 'value',
+                source: name_randomizer.ttAdapter()
+            });
+        });
+    </script>
+</div>

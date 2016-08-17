@@ -1,0 +1,245 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create Company"
+            description="Allow you to create new company"></page-title>
+
+<form role="form" method="post" name="creatCompany" id="create-company" ng-controller="CompanyCtrl" class="validate"
+      novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basic company information</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="name">Company Name
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="company.name" name="name" id="name"
+                                       placeholder="Ex. Cartomat SA"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="vat">Company VAT
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="company.vat" name="vat" id="vat"
+                                       data-validate="required" placeholder="Ex. 1929382CSA"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="saleChannel">Select Channel
+                                    <required/>
+                                </label>
+                                <select class="form-control" ng-model="company.saleChannelId" name="saleChannelId"
+                                        id="saleChannel"
+                                        required>
+                                    <option ng-repeat="saleChannel in saleChannels" value="{{saleChannel.id}}">
+                                        {{saleChannel.name}}
+                                    </option>
+                                </select>
+                                <span ng-show="creatCompany.saleChannelId.$error.required && submitted"
+                                      style="color: #cc3f44;font-size: 12px">This field is required.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="address">Address
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="company.address" name="address"
+                                       id="address" data-validate="required"
+                                       placeholder="Ex. Aval legen"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="number">Number</label>
+                                <input type="text" class="form-control" ng-model="company.number" name="number"
+                                       id="number"
+                                       data-validate="required" placeholder="Ex. 123"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <autosuggestion title="Post Code"
+                                            name="postCodeId" ng-model="company.postCodeId"
+                                            url="mpost/services/postcode/suggest">
+                            </autosuggestion>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="company.saleChannelId != 2">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="supplier">Supplier
+                                    <required/>
+                                </label>
+                                <select class="form-control" ng-model="company.productSupplierId"
+                                        name="productSupplierId" id="supplier" required>
+                                    <option ng-repeat="supplier in suppliers" value="{{supplier.id}}">{{supplier.name}}
+                                    </option>
+                                </select>
+                                <span ng-show="creatCompany.productSupplierId.$error.required && submitted"
+                                      style="color: #cc3f44;font-size: 12px">This field is required.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="company.saleChannelId == 2">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="reseller">Reseller
+                                    <required/>
+                                </label>
+                                <select class="form-control" ng-model="company.resellerId" id="reseller"
+                                        name="resellerId" required>
+                                    <option name="reseller" ng-repeat="reseller in resellers" value="{{reseller.id}}">
+                                        {{reseller.name}}
+                                    </option>
+                                </select>
+                                <span ng-show="creatCompany.resellerId.$error.required && submitted"
+                                      style="color: #cc3f44;font-size: 12px">This field is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="comList">Commission List
+                                    <required/>
+                                </label>
+                                <select class="form-control" ng-model="company.comListId" id="comList"
+                                        name="comListId" required>
+                                    <option ng-repeat="commissionList in commissionLists"
+                                            value="{{commissionList.id}}">
+                                        {{commissionList.name}}
+                                    </option>
+                                </select>
+                                <span ng-show="creatCompany.comListId.$error.required && submitted"
+                                      style="color: #cc3f44;font-size: 12px">This field is required.</span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="billingLevel">Billing Level</label>
+                                <select class="form-control" ng-model="company.billingLevel" id="billingLevel"
+                                        name="billingLevel">
+                                    <option value="company">Company Level</option>
+                                    <option value="shop">Shop Level</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="company.saleChannelId == 2">
+                        <div class="col-md-4">
+                            <div class="form-group form-block">
+                                <input type="checkbox" id="interConnected" ng-model="company.interConnected"/>
+                                <label class="control-label" for="interConnected">Inter Connected</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" ng-show="company.interConnected">
+                            <div class="form-group">
+                                <label class="control-label" for="number">Inter Connected Platform</label>
+                                <select class="form-control" ng-model="company.interConnectedPlatform"
+                                        id="interConnectedPlatform">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="firstName">First Name
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="company.firstName" id="firstName"
+                                       name="firstName"
+                                       data-validate="required"
+                                       placeholder="Ex. Adil"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="lastName">Last Name
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="company.lastName" id="lastName"
+                                       name="lastName"
+                                       data-validate="required" placeholder="Ex. Chraoudou"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="mail">Mail
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="company.mail" name="mail" id="mail"
+                                       data-validate="required,email" data-message-required="This field is required"
+                                       data-message-email="Email is invalid"
+                                       placeholder="Ex. mail@mail.com"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="gsm">GSM Number</label>
+                                <input type="text" class="form-control" ng-model="company.gsm" id="gsm" name="GSM"
+                                       data-validate="required,number,minlength[10],maxlength[10] "
+                                       data-message-minlength="Please enter exactly 10 characters"
+                                       data-message-maxlength="Please enter exactly 10 characters"
+                                       placeholder="Ex. 093 215 22 30"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create();submitted=true">Create Company</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

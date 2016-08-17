@@ -1,0 +1,60 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create Delivery STT "
+            description="Allow you to create new delivery"></page-title>
+
+<form role="form" ng-controller="DeliveryCtrl" class="validate" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h3 class="panel-title">Basic delivery stt information</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <autosuggestion
+                                    title="Company"
+                                    description="Type to select Company"
+                                    name="companyName" ng-model="delivery.companyId"
+                                    url="mpost/services/company/suggest">
+                            </autosuggestion>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="file">File<required/></label>
+                                <input type="file" class="form-control" file-model="delivery.file" name="file" id ="file" data-validate="required"
+                                       data-message-required="Browse the file" /><br>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="number">Statement Number<required/></label>
+                                <input class="form-control" ng-model="delivery.number" id="number" name="number" data-validate="required"
+                                       data-message-required="This field is required" placeholder="Ex. Cartomat SA"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create()">Create Delivery</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

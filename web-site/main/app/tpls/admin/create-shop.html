@@ -1,0 +1,82 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create Shop"
+            description="Allow you to create new shop"></page-title>
+
+<form role="form" method="post" ng-controller="ShopCtrl" id="create-shop" class="validate" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basic shop information</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <autosuggestion
+                                    title="Company"
+                                    description="Type to select Company"
+                                    name="companyName" ng-model="shop.companyId"
+                                    url="mpost/services/company/suggest">
+                            </autosuggestion>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="name">Shop Name
+                                    <required/>
+                                </label>
+                                <input type="text" class="form-control" ng-model="shop.name" name="name" id="name"
+                                       placeholder="Ex. Cartomat Shop"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="address">Address
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="shop.address" id="address"
+                                       data-validate="required"
+                                       name="address"
+                                       placeholder="Ex. Aval legen"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="number">Number</label>
+                                <input class="form-control" ng-model="shop.number" id="number"
+                                       data-validate="required" placeholder="Ex. 123"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <autosuggestion title="Post Code"
+                                            description="Type to select Post Code"
+                                            name="postCode" ng-model="shop.postCodeId"
+                                            url="mpost/services/postcode/suggest">
+                            </autosuggestion>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group  pull-right">
+                                <button type="submit" class="btn btn-success">Add Terminal</button>
+                                <button type="submit" class="btn btn-success" ng-click="create()">Save&Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,60 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Update Reseller"
+            description="Allow you to update reseller"></page-title>
+
+<form role="form" method="post" ng-controller="ResellerCtrl" class="validate" novalidate id="update-reseller">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Update Reseller</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <autosuggestion
+                                    title="Reseller"
+                                    description="Type to select Reseller"
+                                    name="companyName" ng-model="reseller.resellerId"
+                                    url="mpost/services/reseller/suggest">
+
+                            </autosuggestion>
+                        </div>
+
+                        <div class="col-md-4" ng-show="reseller.resellerId != 0">
+                            <label class="control-label">Actual balance</label>
+
+                            <h4 type="text" ng-repeat="reseller in resellers | filter : {id :1}:true ">
+                                {{reseller.balance}} DH </h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4" ng-show="reseller.resellerId != 0">
+                            <div class="form-group form-block">
+                                <label class="control-label" for="balance">Updated balance
+                                    <required/>
+                                </label>
+                                <input class="form-control" ng-model="reseller.balance" id="balance"
+                                       name="balanceId"
+                                       data-validate="required,number"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4" ng-show="reseller.resellerId !=0">
+                            <button type="submit" class="btn btn-success" ng-click="create()">Proceed</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>

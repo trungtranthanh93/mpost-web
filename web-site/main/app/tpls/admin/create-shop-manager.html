@@ -1,0 +1,112 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create Shop Manager"
+            description="Allow you to create new shop manager"></page-title>
+
+<form role="form" ng-controller="ShopManagerCtrl" class="validate" id="create-shop-manager" name="shopManagerForm"
+      novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Shop</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <autosuggestion
+                                    title="Shop"
+                                    description="Type to select Shop"
+                                    name="shopId" ng-model="shopManager.shopId"
+                                    url="mpost/services/shop/suggest">
+                            </autosuggestion>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact</h3>
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="firstName">First Name</label>
+                                <input class="form-control" ng-model="firstName" id="firstName" data-validate="required"
+                                       name="firstName"
+                                       placeholder="Ex. Adil" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="lastName">Last Name</label>
+                                <input class="form-control" ng-model="lastName" id="lastName" name="lastName"
+                                       data-validate="required" placeholder="Ex. Chraoudou"
+                                       data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="mail">Mail (*)</label>
+                                <input class="form-control" ng-model="mail" id="mail" name="mail"
+                                       data-validate="required,email"
+                                       placeholder="Ex. mail@mail.com" data-message-required="This field is required"
+                                       data-message-email="Email is invalid"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="contactType">Contact Type (*)</label>
+                                <select class="form-control" ng-model="contactType" id="contactType">
+                                    <option ng-repeat="contactType in contactTypes" value="contactType.id">
+                                        {{contactType.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="gsm">GSM Number (*)</label>
+                                <input class="form-control" ng-model="gsm" id="gsm" data-validate="required" name="gsm"
+                                       placeholder="Ex. +32 3 215 22 30" data-message-required="This field is required"
+                                       inputmask data-mask="+[99] [9] [999] [99] [99]"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create()">Create Shop Manager</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

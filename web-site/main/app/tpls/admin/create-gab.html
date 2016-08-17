@@ -1,0 +1,58 @@
+<page-title ng-if="layoutOptions.pageTitles" title="Create GAB"
+            description="Allow you to create new gab"></page-title>
+
+<form role="form" ng-controller="GABCtrl" class="validate" id="create-gab" novalidate>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <div class="panel-options">
+                        <min-max-form></min-max-form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name">Name <required /></label>
+                                <input class="form-control" ng-model="gab.name" id="name" data-validate="required" name="name"
+                                       data-message-required="This field is require." placeholder="Ex. Cartomat SA" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="gabId">GABId <required /></label>
+                                <input class="form-control" ng-model="gab.gabId" id="gabId" name="gabId"
+                                       data-validate="required" data-message-required="This field is required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="shopId">Select Shop <required /></label>
+                                <input class="form-control" ng-model="gab.shopId" value="" id="shopId" name="shopId" ng-change="searchShop()"
+                                       data-validate="required" data-message-required="This field is required"/>
+                                <!--<p ng-repeat="shop in shops | filter:shop" ng-show="isSearch">{{shop.name}}</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group  pull-right">
+                <button type="submit" class="btn btn-success" ng-click="create()">Create GAB</button>
+                <button type="reset" class="btn btn-white">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>
